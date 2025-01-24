@@ -14,16 +14,7 @@ class HomeController extends Controller
      */
     public function index()
     {
-        // Verifica el rol del usuario y redirige según corresponda
-        if (Auth::user()->role == 'empleador') {
-            // Redirige al panel de vacantes si es empleador
-            return redirect()->route('vacantes.index');
-        } else if (Auth::user()->role == 'postulante') {
-            // Redirige a la página de inicio o alguna otra página para postulantes
-            return redirect()->route('vacantes.index');
-        }
-
-        // Redirige al inicio si no es ninguno de los dos
-        return redirect('/');
+   // Redirige al inicio si no es ninguno de los dos
+        return redirect('/dashboard');
     }
 }

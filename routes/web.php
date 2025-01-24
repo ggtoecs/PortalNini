@@ -7,10 +7,10 @@ Route::get('/', function () {
 });
 
 Auth::routes();
+use App\Http\Controllers\VacanteController;
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
-
-use App\Http\Controllers\VacanteController;
+Route::get('/dashboard', [VacanteController::class, 'dashboard'])->name('dashboard');
 
 Route::middleware(['auth'])->group(function () {
     Route::resource('vacantes', VacanteController::class);

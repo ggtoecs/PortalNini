@@ -35,14 +35,9 @@ class LoginController extends Controller
      */
     protected function redirectTo()
     {
-        // Check the role of the user and redirect accordingly
-        if (Auth::user()->role == 'empleador') {
-            return route('vacantes.index'); // Redirect to the employer's vacancies page
-        }else if (Auth::user()->role == 'postulante') {
-            return route('postulantes.index'); // Redirect to the employer's vacancies page
-        }
+
 
         // Default redirection for other users (candidates, etc.)
-        return route('home');
+        return route('dashboard');
     }
 }
