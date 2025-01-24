@@ -46,4 +46,9 @@ class User extends Authenticatable
             'password' => 'hashed',
         ];
     }
+    public function vacantes()
+{
+    return $this->belongsToMany(Vacante::class, 'aplicaciones')->withTimestamps();
+}
+
 }
