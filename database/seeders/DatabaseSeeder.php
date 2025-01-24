@@ -23,6 +23,8 @@ class DatabaseSeeder extends Seeder
             'email' => 'admin@gmail.com',
             'email_verified_at' => now(),
             'password' => bcrypt('adminPass'),
+            'role' => 'admin',
+            'password' => bcrypt('adminPass'),
             'remember_token' => Str::random(10),
         ]);
         User::factory()->create([
@@ -30,6 +32,15 @@ class DatabaseSeeder extends Seeder
             'email' => 'vane@gmail.com',
             'email_verified_at' => now(),
             'password' => bcrypt('vane300'),
+            'role' => 'empleador',
+            'remember_token' => Str::random(10),
+        ]);
+        User::factory()->create([
+            'name' => 'Nay Palmero',
+            'email' => 'nay@gmail.com',
+            'email_verified_at' => now(),
+            'password' => bcrypt('pumpurin'),
+            'role' => 'postulante',
             'remember_token' => Str::random(10),
         ]);
     }
