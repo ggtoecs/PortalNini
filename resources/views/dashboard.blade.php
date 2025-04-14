@@ -19,8 +19,8 @@
                                 <p><strong>Sueldo semanal:</strong> ${{ $vacante->salario }}</p>
                                 <p><strong>Ubicación:</strong> {{ $vacante->ubicacion }}</p>
                                 <p><strong>Tipo de Trabajo:</strong> {{ $vacante->tipo_trabajo }}</p>
-                                <a href="#" class="btn btn-primary">Ver más</a>
-                            </div>
+                                <a href="{{ route('vacantes.show', ['id' => $vacante->id, 'empleador_id' => $vacante->empleador_id]) }}" class="btn btn-primary">Ver más</a>
+                                </div>
                         </div>
                     </div>
                 @endforeach

@@ -1,4 +1,7 @@
-@extends('layouts.app')
+@extends('layouts.gandy')
+@section('css')
+<link rel="stylesheet" href="{{asset('/estilos/create.css')}}">
+@endsection
 
 @section('content')
     <div class="container">

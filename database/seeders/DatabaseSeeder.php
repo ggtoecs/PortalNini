@@ -11,7 +11,6 @@ class DatabaseSeeder extends Seeder
 {
     public function run(): void
     {
-        // 🔧 Desactivar claves foráneas temporalmente
         DB::statement('SET FOREIGN_KEY_CHECKS=0;');
 
         // 🔄 Truncar tablas en orden correcto

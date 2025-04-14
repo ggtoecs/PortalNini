@@ -1,0 +1,132 @@
+/* Estilo para la vista de creación de vacante */
+.container {
+    background-color: #fff;
+    padding: 30px;
+    border-radius: 10px;
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+    margin-top: 20px;
+    max-width: 800px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+/* Título principal */
+h2 {
+    color: #aa6ee2;
+    font-family: 'Georgia', serif;
+    font-weight: bold;
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+/* Estilo para los labels */
+.form-group label {
+    color: #6a4f9b; /* Color suave para los labels */
+    font-weight: 600;
+    font-size: 16px;
+    margin-bottom: 10px;
+}
+
+/* Estilo para los inputs y textarea */
+.form-control {
+    font-family: 'Arial', sans-serif;
+    font-size: 16px;
+    padding: 12px;
+    border-radius: 5px;
+    border: 2px solid #d1b3e3;
+    transition: border-color 0.3s ease;
+}
+
+.form-control:focus {
+    border-color: #aa6ee2;
+    outline: none;
+}
+
+/* Estilo para el botón de submit */
+button[type="submit"] {
+    background-color: #af70c9;
+    color: white;
+    padding: 12px 20px;
+    font-size: 18px;
+    font-weight: bold;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    width: 100%;
+    margin-top: 20px;
+}
+
+button[type="submit"]:hover {
+    background-color: #9b58c1;
+}
+
+/* Estilo para los select */
+select.form-control {
+    font-family: 'Arial', sans-serif;
+    font-size: 16px;
+    padding: 12px;
+    border-radius: 5px;
+    border: 2px solid #d1b3e3;
+}
+
+/* Estilo para las áreas de texto */
+textarea.form-control {
+    font-family: 'Arial', sans-serif;
+    font-size: 16px;
+    height: 150px;
+    resize: vertical;
+    padding: 12px;
+    border-radius: 5px;
+    border: 2px solid #d1b3e3;
+}
+
+/* Estilo para los mensajes de error */
+.invalid-feedback {
+    font-size: 14px;
+    color: #d9534f;
+    margin-top: 10px;
+}
+
+/* Estilo para los botones del navbar */
+.navbar {
+    background-color: #af70c9; /* Rosa pastel */
+    border-bottom: 3px solid #a36eb1; /* Rosa más fuerte */
+}
+
+.navbar-brand {
+    font-weight: bold;
+    color: #fff !important;
+    font-size: 24px;
+}
+
+.nav-link {
+    color: #fff !important;
+    font-size: 18px;
+    font-weight: 500;
+    padding: 10px 15px;
+    border-radius: 5px;
+    transition: background-color 0.3s ease;
+}
+
+.nav-link:hover {
+    background-color: #d02fdf;
+    border-radius: 5px;
+}
+
+.navbar-nav .nav-item {
+    background-color: #a24eb3; 
+    border-radius: 5px;
+    margin: 0 10px;
+}
+
+.navbar-nav .nav-item .nav-link {
+    padding: 10px 20px;
+    font-size: 18px;
+    font-weight: 500;
+    transition: background-color 0.3s ease;
+}
+
+.navbar-nav .nav-item .nav-link:hover {
+    background-color: #ff77a9;
+    border-radius: 5px;
+}
