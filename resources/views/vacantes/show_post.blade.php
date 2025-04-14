@@ -2,6 +2,15 @@
 
 @section('css')
 <link rel="stylesheet" href="{{ asset('/estilos/create.css') }}">
+<style>
+    .ver-cv-btn {
+    font-size: 1rem; /* Fuente más pequeña */
+    width: 40px;
+    height: 40px;
+    padding: 0.25rem 0.5rem; /* Reducir el padding para hacerlo más compacto */
+}
+
+</style>
 @endsection
 
 @section('content')
@@ -20,15 +29,8 @@
                     <p><strong>Ubicación:</strong> {{ $vacante->ubicacion }}</p>
                     <p><strong>Tipo de Trabajo:</strong> {{ $vacante->tipo_trabajo }}</p>
 
-                    <!-- Verificar si el usuario ya se postuló -->
-                    @if (!$userHasApplied)
-                        <form action="{{ route('aplicaciones.store', $vacante->id) }}" method="POST">
-                            @csrf
-                            <button type="submit" class="btn btn-primary">Postularme</button>
-                        </form>
-                    @else
-                        <p class="alert alert-info">Ya te has postulado a esta vacante.</p>
-                    @endif
+                    <a href="#" class="btn btn-secondary mt-3">Editar</a>
+                    <a href="#" class="btn btn-secondary mt-3">Eliminar</a>
                 </div>
             </div>
         </div>
@@ -47,4 +49,26 @@
         </div>
     </div>
 </div>
+<div class="container mt-4">
+<h1 class="mb-4">Postulantes</h1>
+@if($vacante->aplicaciones->isEmpty())
+    <p>No hay postulantes aún para esta vacante.</p>
+    @else
+    <ul class="list-group">
+    @foreach($vacante->aplicaciones as $aplicacion)
+        <li class="list-group-item d-flex justify-content-between">
+            <div>
+                <strong>Nombre:</strong> {{ $aplicacion->user->name }} <br>
+                <strong>Email:</strong> {{ $aplicacion->user->email }} <br>
+            </div>
+            <!-- Botón Ver CV con clase personalizada -->
+            <a href="#" class="btn btn-info btn-sm ver-cv-btn">CV</a>
+        </li>
+    @endforeach
+</ul>
+
+@endif
+
+</div>
+
 @endsection

@@ -9,12 +9,6 @@ use Illuminate\Support\Facades\Auth;
 
 class VacanteController extends Controller
 {
-    // Método para mostrar la vista de edición
-    // public function edit($id)
-    // {
-    //     $vacante = Vacante::findOrFail($id);
-    //     return view('vacantes.edit', compact('vacante'));
-    // }
 
     public function dashboard()
     {
@@ -27,8 +21,22 @@ class VacanteController extends Controller
                       ->where('empleador_id', $empleador_id)
                       ->firstOrFail();
 
-    return view('vacantes.show', compact('vacante'));
+    $userHasApplied = $vacante->aplicaciones()->where('user_id', Auth::id())->exists();
+
+
+    return view('vacantes.show', compact('vacante', 'userHasApplied'));
 }
+
+public function showPost($id, $empleador_id)
+{
+    $vacante = Vacante::with(['empleador', 'aplicaciones.user'])
+                      ->where('id', $id)
+                      ->where('empleador_id', $empleador_id)
+                      ->firstOrFail();
+
+    return view('vacantes.show_post', compact('vacante'));
+}
+
 
 public function misVacantes()
 {
@@ -67,31 +75,28 @@ public function misVacantes()
         // Redirigir con mensaje de éxito
         return redirect()->route('dashboard')->with('success', 'Vacante creada con éxito.');
     }
-    
 
-    // Método para actualizar la vacante
-    // public function update(Request $request, $id)
-    // {
-    //     $request->validate([
-    //         'titulo' => 'required',
-    //         'descripcion' => 'required',
-    //         'salario' => 'required|numeric',
-    //         'ubicacion' => 'required',
-    //         'tipo_trabajo' => 'required',
-    //     ]);
+    public function edit($id)
+{
+    $vacante = Vacante::findOrFail($id);
+    return view('vacantes.edit', compact('vacante'));
+}
 
-    //     $vacante = Vacante::findOrFail($id);
-    //     $vacante->update($request->all());
+public function update(Request $request, $id)
+{
+    $request->validate([
+        'titulo' => 'required|string|max:255',
+        'descripcion' => 'required|string',
+        'salario' => 'required|numeric',
+        'ubicacion' => 'required|string',
+        'tipo_trabajo' => 'required|string',
+    ]);
 
-    //     return redirect()->route('vacantes.index')->with('success', 'Vacante actualizada con éxito');
-    // }
+    $vacante = Vacante::findOrFail($id);
+    $vacante->update($request->all());
 
-    // // Método para eliminar la vacante
-    // public function destroy($id)
-    // {
-    //     $vacante = Vacante::findOrFail($id);
-    //     $vacante->delete();
+    return redirect()->route('vacantes.show', $vacante->id)->with('success', 'Vacante actualizada correctamente.');
+}
 
-    //     return redirect()->route('vacantes.index')->with('success', 'Vacante eliminada con éxito');
-    // }
+
 }

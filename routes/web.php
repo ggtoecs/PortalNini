@@ -3,6 +3,8 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\VacanteController;
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\AplicacionController;
+
 
 Route::get('/', function () {
     return view('welcome');
@@ -18,6 +20,14 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/vacantes/create', [VacanteController::class, 'create'])->name('vacantes.create'); // formulario
     Route::post('/vacantes', [VacanteController::class, 'store'])->name('vacantes.store'); // guardar
     Route::get('/vacantes/{id}/{empleador_id}', [VacanteController::class, 'show'])->name('vacantes.show');
+
     Route::get('/mis-vacantes', [VacanteController::class, 'misVacantes'])->name('vacantes.mias')->middleware('auth');
+    Route::get('/vacantes/{id}/{empleador_id}/post', [VacanteController::class, 'showPost'])->name('vacantes.showPost');
+
+    Route::post('/vacantes/{id}/postular', [AplicacionController::class, 'store'])->middleware('auth')->name('aplicaciones.store');
+    
+    Route::get('/vacantes/{vacante}/edit', [VacanteController::class, 'edit'])->name('vacantes.edit');
+    Route::put('/vacantes/{vacante}', [VacanteController::class, 'update'])->name('vacantes.update');
+
 
    });

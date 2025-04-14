@@ -17,7 +17,7 @@
                             <p><strong>Ubicación:</strong> {{ $vacante->ubicacion }}</p>
                             <p><strong>Tipo:</strong> {{ $vacante->tipo_trabajo }}</p>
 
-                            <a href="{{ route('vacantes.show', ['id' => $vacante->id, 'empleador_id' => $vacante->empleador_id]) }}" class="btn btn-primary">Ver</a>
+                            <a href="{{ route('vacantes.showPost', ['id' => $vacante->id, 'empleador_id' => $vacante->empleador_id]) }}" class="btn btn-primary">Ver</a>
 
                         </div>
                     </div>

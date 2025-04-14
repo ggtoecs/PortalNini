@@ -22,5 +22,9 @@ class Vacante extends Model
 {
     return $this->belongsToMany(User::class, 'aplicaciones')->withTimestamps();
 }
+public function aplicaciones()
+{
+    return $this->hasMany(Aplicacion::class);
+}
 
 }
