@@ -5,6 +5,7 @@ namespace Database\Seeders;
 use Illuminate\Database\Seeder;
 use App\Models\User;
 use App\Models\Vacante;
+use App\Models\MejorarPerfil;
 
 class VacanteSeeder extends Seeder
 {

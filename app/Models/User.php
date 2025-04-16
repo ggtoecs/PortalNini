@@ -22,6 +22,7 @@ class User extends Authenticatable
         'email',
         'password',
         'role',
+        // 'cv',
     ];
 
     /**
@@ -49,6 +50,10 @@ class User extends Authenticatable
     public function vacantes()
 {
     return $this->belongsToMany(Vacante::class, 'aplicaciones')->withTimestamps();
+}
+public function perfil()
+{
+    return $this->hasMany(MejorarPerfil::class, 'user_id');
 }
 
 }

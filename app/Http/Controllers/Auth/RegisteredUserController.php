@@ -35,30 +35,37 @@ class RegisteredUserController extends Controller
      * @return \Illuminate\Http\RedirectResponse
      */
     public function store(Request $request): RedirectResponse
-    {
-        // Validación de los datos del formulario
-        $request->validate([
-            'name' => ['required', 'string', 'max:255'],
-            'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
-            'password' => ['required', 'string', 'min:8', 'confirmed'],
-            'rol_id' => ['required', 'exists:roles,id'],
-        ]);
+{
+    // Validación de los datos del formulario
+    $request->validate([
+        'name' => ['required', 'string', 'max:255'],
+        'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
+        'password' => ['required', 'string', 'min:8', 'confirmed'],
+        'rol_id' => ['required', 'exists:roles,id'],
+    ]);
 
-        // Crear el usuario con el rol seleccionado
-        $user = User::create([
-            'name' => $request->name,
-            'email' => $request->email,
-            'password' => Hash::make($request->password),
-            'rol_id' => $request->rol_id,
-        ]);
+    // Crear el usuario con el rol seleccionado
+    $user = User::create([
+        'name' => $request->name,
+        'email' => $request->email,
+        'password' => Hash::make($request->password),
+        'rol_id' => $request->rol_id,
+    ]);
 
-        // Desencadenar el evento Registered
-        event(new Registered($user));
+    // Crear un perfil vacío para el usuario recién creado
+    $user->perfil()->create([
+        // Puedes agregar campos adicionales si lo deseas
+        'descripcion' => '',  // Por ejemplo, dejar la descripción vacía inicialmente
+        'cv' => '',           // Y dejar el CV vacío inicialmente
+    ]);
 
-        // Iniciar sesión automáticamente
-        Auth::login($user);
+    // Desencadenar el evento Registered
+    event(new Registered($user));
 
-        // Redirigir al usuario a la página de inicio
-        return redirect(RouteServiceProvider::HOME);
-    }
+    // Iniciar sesión automáticamente
+    Auth::login($user);
+
+    return redirect(RouteServiceProvider::HOME);
+}
+
 }

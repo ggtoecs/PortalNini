@@ -13,9 +13,8 @@ class DatabaseSeeder extends Seeder
     {
         DB::statement('SET FOREIGN_KEY_CHECKS=0;');
 
-        // 🔄 Truncar tablas en orden correcto
-        DB::table('vacantes')->truncate(); // si tienes datos ahí
-        DB::table('users')->truncate();    // ahora ya no da error
+        DB::table('vacantes')->truncate(); 
+        DB::table('users')->truncate();
 
         DB::statement('SET FOREIGN_KEY_CHECKS=1;');
 
@@ -30,10 +29,10 @@ class DatabaseSeeder extends Seeder
         ]);
 
         User::factory()->create([
-            'name' => 'Vanessa Torres',
-            'email' => 'vane@gmail.com',
+            'name' => 'Mayte Melendez',
+            'email' => 'mayteee@gmail.com',
             'email_verified_at' => now(),
-            'password' => bcrypt('vane300'),
+            'password' => bcrypt('password'),
             'role' => 'empleador',
             'remember_token' => Str::random(10),
         ]);

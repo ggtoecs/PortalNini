@@ -1,74 +1,54 @@
 @extends('layouts.gandy')
 
-@section('css')
-<link rel="stylesheet" href="{{ asset('/estilos/create.css') }}">
-<style>
-    .ver-cv-btn {
-    font-size: 1rem; /* Fuente más pequeña */
-    width: 40px;
-    height: 40px;
-    padding: 0.25rem 0.5rem; /* Reducir el padding para hacerlo más compacto */
-}
-
-</style>
-@endsection
-
 @section('content')
-<div class="container mt-4">
-    <h1 class="mb-4">{{ $vacante->titulo }}</h1>
-
-    <div class="row">
-        <!-- Columna principal para la vacante -->
-        <div class="col-md-8">
-            <div class="card mb-4">
-                <div class="card-body">
-                    <p><strong>Descripción:</strong></p>
-                    <p>{{ $vacante->descripcion }}</p>
-
-                    <p><strong>Sueldo semanal:</strong> ${{ $vacante->salario }}</p>
-                    <p><strong>Ubicación:</strong> {{ $vacante->ubicacion }}</p>
-                    <p><strong>Tipo de Trabajo:</strong> {{ $vacante->tipo_trabajo }}</p>
-
-                    <a href="#" class="btn btn-secondary mt-3">Editar</a>
-                    <a href="#" class="btn btn-secondary mt-3">Eliminar</a>
-                </div>
-            </div>
+<div class="container">
+    <div class="card">
+        <div class="card-header">
+            <h3>Detalles de la Vacante: {{ $vacante->titulo }}</h3>
         </div>
+        <div class="card-body">
+            <p><strong class= "mt-4">Descripción:</strong> {{ $vacante->descripcion }}</p>
 
-        <!-- Columna lateral para la info del empleador -->
-        <div class="col-md-4">
-            <div class="card bg-light">
-                <div class="card-header">
-                    <strong>Información del Empleador</strong>
-                </div>
-                <div class="card-body">
-                    <p><strong>Nombre:</strong> {{ $vacante->empleador->name }}</p>
-                    <p><strong>Email:</strong> {{ $vacante->empleador->email }}</p>
-                </div>
-            </div>
+            <ul class="list-group">
+                @foreach($postulantes as $postulante)
+                    <li class="list-group-item d-flex justify-content-between align-items-center">
+                        <div>
+                            <h5>{{ $postulante['nombre'] }}</h5>
+                        </div>
+                        <!-- Botón para ver el CV en un modal -->
+                        <button class="btn btn-info btn-sm" data-toggle="modal" data-target="#modalCV{{ $postulante['id'] }}">
+                            Ver CV
+                        </button>
+                    </li>
+
+                    <!-- Modal para mostrar detalles del postulante -->
+                    <div class="modal fade" id="modalCV{{ $postulante['id'] }}" tabindex="-1" role="dialog" aria-labelledby="cvModalLabel{{ $postulante['id'] }}" aria-hidden="true">
+                        <div class="modal-dialog modal-lg" role="document">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h5 class="modal-title" id="cvModalLabel{{ $postulante['id'] }}">Detalles del Postulante: {{ $postulante['nombre'] }}</h5>
+                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                        <span aria-hidden="true">&times;</span>
+                                    </button>
+                                </div>
+                                <div class="modal-body">
+                                    <p><strong>Nombre:</strong> {{ $postulante['nombre'] }}</p>
+                                    <p><strong>Descripción:</strong> {{ $postulante['descripcion'] }}</p>
+                                    <p><strong>CV:</strong> 
+                                    @if($postulante['cv'])
+                                            <a href="{{ asset('storage/' . $postulante['cv']) }}" target="_blank">Ver archivo</a>
+                                        @else
+                                            No hay CV disponible
+                                        @endif
+
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                @endforeach
+            </ul>
         </div>
     </div>
 </div>
-<div class="container mt-4">
-<h1 class="mb-4">Postulantes</h1>
-@if($vacante->aplicaciones->isEmpty())
-    <p>No hay postulantes aún para esta vacante.</p>
-    @else
-    <ul class="list-group">
-    @foreach($vacante->aplicaciones as $aplicacion)
-        <li class="list-group-item d-flex justify-content-between">
-            <div>
-                <strong>Nombre:</strong> {{ $aplicacion->user->name }} <br>
-                <strong>Email:</strong> {{ $aplicacion->user->email }} <br>
-            </div>
-            <!-- Botón Ver CV con clase personalizada -->
-            <a href="#" class="btn btn-info btn-sm ver-cv-btn">CV</a>
-        </li>
-    @endforeach
-</ul>
-
-@endif
-
-</div>
-
 @endsection

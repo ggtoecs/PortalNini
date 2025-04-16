@@ -61,7 +61,11 @@
                         @endauth
                     </ul>
                     <ul class="navbar-nav ms-auto">
+                    
                         @auth
+                        <li class="nav-item">
+                                    <a class="nav-link" href="{{ route('vacantes.perfil') }}">Mi perfil</a>
+                        </li>
                             <li class="nav-item">
                                 <a class="nav-link" href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">Cerrar sesión</a>
                             </li>
@@ -69,6 +73,7 @@
                                 @csrf
                             </form>
                         @else
+
                             <li class="nav-item">
                                 <a class="nav-link" href="{{ route('login') }}">Iniciar sesión</a>
                             </li>

@@ -14,7 +14,8 @@ class HomeController extends Controller
      */
     public function index()
     {
-   // Redirige al inicio si no es ninguno de los dos
         return redirect('/dashboard');
     }
+
+ 
 }
